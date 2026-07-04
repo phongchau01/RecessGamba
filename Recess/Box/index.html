@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Blind Box</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="game-container">
+        <div id="blind-box" class="box state-closed">
+            <div class="box-top"><span>RIP HERE</span></div>
+            <div class="box-body">
+                <div class="hidden-markings">? ? ?</div>
+                <div class="box-text">MYSTERY PLUSH</div>
+            </div>
+        </div>
+
+        <div id="mystery-bag" class="bag hidden">
+            <div class="bag-top"><span>TEAR</span></div>
+            <div class="bag-body">
+                <div class="bag-crinkles"></div>
+            </div>
+        </div>
+
+        <div id="prize-container" class="prize-stage hidden">
+            <div class="glow-effect" id="rarity-glow"></div>
+            <div class="plushy" id="plushy-display">🧸</div>
+            <div class="prize-info">
+                <h2 id="prize-name">???</h2>
+                <span id="prize-rarity" class="rarity-tag">Common</span>
+            </div>
+            <button id="reset-btn">Open Another</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

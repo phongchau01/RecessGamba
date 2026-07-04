@@ -1,0 +1,241 @@
+:root {
+    --bg-color: #1a1a2e;
+    --box-color: #e94560;
+    --box-dark: #c0392b;
+    --bag-color: #4f5d75;
+    --common-glow: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+    --rare-glow: drop-shadow(0 0 25px #00d2fc) drop-shadow(0 0 40px #00d2fc);
+    --legendary-glow: drop-shadow(0 0 30px #ff007f) drop-shadow(0 0 60px #ff007f);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
+
+.game-container {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- BOX STYLE & ANIMATIONS --- */
+.box {
+    width: 200px;
+    height: 260px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.5s;
+}
+
+.box:hover {
+    transform: scale(1.03) rotate(1deg);
+}
+
+.box-top {
+    width: 100%;
+    height: 50px;
+    background-color: var(--box-dark);
+    border-bottom: 3px dashed #fff;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.box-body {
+    width: 100%;
+    height: 210px;
+    background-color: var(--box-color);
+    border-radius: 0 0 8px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.box-text {
+    font-size: 1.2rem;
+    font-weight: 900;
+    border: 2px solid #fff;
+    padding: 5px 10px;
+}
+
+/* Invisible markings revealed on hover/active state */
+.hidden-markings {
+    position: absolute;
+    font-size: 5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0);
+    transition: color 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.box:hover .hidden-markings {
+    color: rgba(255, 255, 255, 0.08);
+    transform: scale(1.2) rotate(-10deg);
+}
+
+/* Ripped Animation States */
+.box.ripped .box-top {
+    transform: translateY(-80px) rotate(-15deg);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.box.ripped .box-body {
+    transform: translateY(40px);
+    opacity: 0;
+    transition: transform 0.4s ease 0.1s, opacity 0.4s ease 0.1s;
+}
+
+/* --- FOIL BAG STYLE --- */
+.bag {
+    width: 180px;
+    height: 240px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s, opacity 0.5s;
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bag:hover {
+    transform: scale(1.05);
+}
+
+.bag-top {
+    width: 100%;
+    height: 40px;
+    background: #3a4454;
+    clip-path: polygon(0% 0%, 10% 20%, 20% 0%, 30% 20%, 40% 0%, 50% 20%, 60% 0%, 70% 20%, 80% 0%, 90% 20%, 100% 0%, 100% 100%, 0% 100%);
+    border-bottom: 2px dashed rgba(255,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: rgba(255,255,255,0.6);
+}
+
+.bag-body {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--bag-color) 0%, #2e3846 100%);
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.bag.ripped .bag-top {
+    transform: translateY(-60px) translateX(40px) rotate(25deg);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bag.ripped .bag-body {
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease 0.1s;
+}
+
+/* --- PRIZE REVEAL STAGE --- */
+.prize-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+}
+
+.plushy {
+    font-size: 7rem;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.plushy:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Dynamic Rarity Glows */
+.glow-effect {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.glow-common { filter: var(--common-glow); }
+.glow-rare { filter: var(--rare-glow); animation: pulse 2s infinite alternate; }
+.glow-legendary { filter: var(--legendary-glow); animation: pulse 1.2s infinite alternate; }
+
+.prize-info {
+    text-align: center;
+    margin-top: 20px;
+    z-index: 2;
+}
+
+.prize-info h2 {
+    margin: 5px 0;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.rarity-tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tag-common { background-color: #7f8c8d; }
+.tag-rare { background-color: #00a8ff; color: #fff; }
+.tag-legendary { background-color: #e84118; color: #fff; box-shadow: 0 0 10px #e84118; }
+
+#reset-btn {
+    margin-top: 25px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+}
+
+#reset-btn:hover { background-color: #e1e1e1; }
+
+/* --- HELPER CLASSES & ANIMATIONS --- */
+.hidden { display: none !important; }
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
