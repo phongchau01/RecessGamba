@@ -36,6 +36,8 @@ body {
     align-items: center;
     transform-style: preserve-3d;
     transition: transform 0.2s;
+    /* ADD THIS LINE: Tilts the camera down slightly so we look into the chest */
+    transform: rotateX(15deg); 
 }
 
 .chest-container:hover:not(.opened) { transform: scale(1.05); }
@@ -49,6 +51,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    transform-style: preserve-3d; /* <-- ADD THIS LINE to unlock 3D depth for the lid */
 }
 
 .chest-base {
@@ -62,6 +65,8 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     z-index: 2;
     box-sizing: border-box;
+    /* Keeps the base firmly in the foreground */
+    transform: translateZ(10px); 
 }
 
 .chest-base::before, .chest-base::after {
@@ -122,7 +127,21 @@ body {
 .chest-lid::after { right: 10px; }
 
 /* --- Animation States --- */
-.chest-container.opened .chest-lid { transform: rotateX(-110deg) translateY(-10px); }
+.chest-container.opened .chest-lid { 
+    /* Props the lid up halfway and pushes it slightly back */
+    transform: rotateX(-65deg) translateY(-1px) translateZ(-10px); 
+    
+    /* Swaps the appearance to a hollow inside cavity */
+    background: #3d220a; 
+    box-shadow: inset 0 15px 20px rgba(0, 0, 0, 0.7); 
+}
+
+/* Hide the outside gold bands when looking at the inside of the lid */
+.chest-container.opened .chest-lid::before,
+.chest-container.opened .chest-lid::after {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
 .chest-container.opened .lock { transform: translateX(-50%) translateY(15px) rotateX(180deg); opacity: 0; }
 
 .rumble { animation: shake 0.4s linear infinite; }
