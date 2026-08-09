@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treasure Chest Loot Drop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="chest-container" id="chestContainer" onclick="openChest()">
+        <!-- New background glow element -->
+        <div class="chest-glow" id="chestGlow"></div>
+
+        <!-- The Loot hidden inside/behind -->
+        <div class="loot-display" id="lootDisplay">
+            <div class="loot-item" id="lootIcon">⚔️</div>
+            <div class="loot-text" id="lootLabel">COMMON ITEM</div>
+        </div>
+
+        <!-- The Chest Box -->
+        <div class="chest" id="chestMesh"></div>
+    </div>
+
+    <button class="reset-btn" onclick="resetChest()">Close Chest</button>
+
+    <script src="script.js"></script>
+</body>
+</html>

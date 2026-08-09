@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Click Gacha Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="status" id="status-text">Click Crank 3 Times to Spin!</div>
+
+    <div class="machine-wrap">
+        <div class="globe" id="globe">
+            <div class="inner-capsule"></div>
+            <div class="inner-capsule"></div>
+            <div class="inner-capsule"></div>
+            <div class="inner-capsule"></div>
+            <div class="inner-capsule"></div>
+        </div>
+
+        <div class="body">
+            <div class="crank" id="crank"></div>
+            <div class="slot">
+                <div class="reward-capsule" id="reward-capsule"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="reveal-overlay" id="reveal-overlay">
+    <div class="display-capsule" id="display-capsule"></div>
+    <div class="rarity-text" id="rarity-text">COMMON</div>
+    <div class="click-anywhere">Click anywhere to return</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
