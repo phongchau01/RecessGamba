@@ -25,6 +25,12 @@ body {
     animation: pop 0.5s ease-out;
 }
 
+#reward-item img {
+    width: 120px;
+    height: auto;
+    border-radius: 16px;
+}
+
 #reward-name {
     font-size: 24px;
     font-weight: bold;
@@ -59,12 +65,33 @@ body {
 /* The throwing monkey element */
 #monkey {
     position: absolute;
-    font-size: 100px;
+    width: 120px;
+    height: 120px;
     bottom: -150px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 5;
     transition: bottom 0.5s ease-out;
+    background-image: url('style/images/monkinotthrow.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#monkey.throwing {
+    animation: monkey-throw 0.8s steps(1, end) forwards;
+}
+
+@keyframes monkey-throw {
+    0%, 33% {
+        background-image: url('style/images/monkinotthrow.jpg');
+    }
+    34%, 66% {
+        background-image: url('style/images/monkimidthrow.jpg');
+    }
+    67%, 100% {
+        background-image: url('style/images/monkithrow.jpg');
+    }
 }
 
 #banana {

@@ -6,13 +6,13 @@ const rewardContainer = document.getElementById('reward-container');
 
 // Gacha Loot Table
 const items = [
-    { name: "Brown Bear Plush", emoji: "🧸", rarity: "common", weight: 50 },
-    { name: "Rubber Duck", emoji: "🦆", rarity: "common", weight: 50 },
-    { name: "Shiny Toy Car", emoji: "🏎️", rarity: "rare", weight: 30 },
-    { name: "Wizard Hat", emoji: "🧙‍♂️", rarity: "rare", weight: 30 },
-    { name: "Golden Crown", emoji: "👑", rarity: "epic", weight: 15 },
-    { name: "Robo-Buddy", emoji: "🤖", rarity: "epic", weight: 15 },
-    { name: "Mythical Diamond Dragon", emoji: "🐉", rarity: "legendary", weight: 4 }
+    { name: "Netflix", image: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg", rarity: "rare", weight: 25 },
+    { name: "YouTube", image: "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg", rarity: "rare", weight: 25 },
+    { name: "Cat Working", image: "style/images/Cat_working-Photoroom.webp", rarity: "epic", weight: 20 },
+    { name: "Spotify", image: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg", rarity: "epic", weight: 15 },
+    { name: "Disney+", image: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg", rarity: "legendary", weight: 7 },
+    { name: "Twitch", image: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Twitch_logo_2019.svg", rarity: "legendary", weight: 5 },
+    { name: "Prime Video", image: "https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png", rarity: "legendary", weight: 3 }
 ];
 
 let isDrawing = false;
@@ -31,11 +31,17 @@ function startSequence() {
     rewardContainer.style.display = "none";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.pointerEvents = "none"; 
+    monkey.classList.remove('throwing');
+    monkey.style.backgroundImage = "url('style/images/monkinotthrow.jpg')";
+    monkey.style.animation = 'none';
+    void monkey.offsetWidth; // force reflow so animation restarts cleanly
+    monkey.style.animation = '';
 
     determineReward();
 
     // Monkey jumps up
     monkey.style.bottom = "20px";
+    monkey.classList.add('throwing');
 
     setTimeout(() => {
         banana.style.display = "block";
@@ -166,7 +172,12 @@ function determineReward() {
         random -= item.weight;
     }
 
-    document.getElementById('reward-item').innerText = selectedItem.emoji;
+    const rewardItem = document.getElementById('reward-item');
+    if (selectedItem.image) {
+        rewardItem.innerHTML = `<img src="${selectedItem.image}" alt="${selectedItem.name}">`;
+    } else {
+        rewardItem.innerText = selectedItem.emoji;
+    }
     document.getElementById('reward-name').innerText = selectedItem.name;
     
     const rarityBadge = document.getElementById('reward-rarity');
