@@ -16,6 +16,7 @@ function openChest() {
     const chest = document.getElementById('chestMesh');
     const icon = document.getElementById('lootIcon');
     const label = document.getElementById('lootLabel');
+    const glow = document.getElementById('chestGlow'); // Grab the new glow element
 
     const reward = pool[Math.floor(Math.random() * pool.length)];
 
@@ -29,6 +30,7 @@ function openChest() {
 
     label.className = `loot-text rarity-${reward.rarity}`;
     label.innerText = reward.name.toUpperCase();
+    glow.className = `chest-glow glow-${reward.rarity}`;
 
     chest.classList.add('rumble');
 
@@ -87,4 +89,5 @@ function resetChest() {
     isOpened = false;
     document.getElementById('chestContainer').classList.remove('opened');
     document.getElementById('chestMesh').classList.remove('rumble');
+    document.getElementById('chestGlow').className = 'chest-glow';
 }
